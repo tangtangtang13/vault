@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>Vault Notes</title>
+<style>
+body{margin:0;font-family:sans-serif;background:#020617;color:#fff;padding:20px}
+textarea,button{
+  width:100%;border-radius:10px;border:none;margin-top:10px;padding:10px;
+}
+textarea{height:200px}
+button{background:#2563eb;color:#fff}
+.note{
+  margin-top:20px;padding:14px;border-radius:12px;background:#020617;
+  box-shadow:0 10px 30px rgba(0,0,0,.5);
+}
+</style>
+</head>
+
+<body>
+<script>
+if(sessionStorage.getItem("auth")!=="ok"){
+  location.replace("index.html");
+}
+</script>
+
+<h2>📝 โน้ตรหัส</h2>
+<textarea id="text"></textarea>
+<button onclick="save()">💾 บันทึก</button>
+
+<div class="note" id="view"></div>
+
+<script src="js/notes.js"></script>
+</body>
+</html>
