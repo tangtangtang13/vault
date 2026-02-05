@@ -2,23 +2,15 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Vault Login</title>
-<link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="css/style.css">
 </head>
+<body>
+<h2>🔐 Vault</h2>
 
-<body class="center">
+<input type="password" id="master" placeholder="Master Password">
+<button onclick="unlock()">Unlock</button>
 
-<div class="card">
-  <h2>🔐 Vault</h2>
-  <input id="password" type="password" placeholder="Master Password">
-  <button onclick="login()">เข้าสู่ระบบ</button>
-  <button class="alt" onclick="loginWithBiometric()">👆 Face ID</button>
-  <p id="error"></p>
-</div>
-
-<script src="js/auth.js"></script>
-<script src="js/biometric.js"></script>
+<script type="module" src="js/auth.js"></script>
 </body>
 </html>
