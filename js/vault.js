@@ -1,13 +1,14 @@
 import { openDB } from "./db.js";
-import { deriveKey, encrypt } from "./crypto.js";
+import { deriveKey, encrypt, decrypt } from "./crypto.js";
+import { lockNow } from "./lock.js";
 
 let key;
 
 (async () => {
   const session = JSON.parse(sessionStorage.getItem("vault_key"));
-  if (!session) location.href = "index.html";
+  if (!session) lockNow();
 
-  const pw = prompt("Re-enter Master Password");
+  const pw = prompt("Master Password");
   const salt = new Uint8Array(session.salt);
   key = await deriveKey(pw, salt);
   loadItems();
@@ -16,36 +17,32 @@ let key;
 async function loadItems() {
   const db = await openDB();
   const tx = db.transaction("items");
-  const store = tx.objectStore("items");
-  store.getAll().onsuccess = e => {
+  tx.objectStore("items").getAll().onsuccess = async e => {
     const ul = document.getElementById("list");
     ul.innerHTML = "";
-    e.target.result.forEach(i => {
+    for (const i of e.target.result) {
       const li = document.createElement("li");
-      li.textContent = `${i.category} | ${i.title}`;
+      const btn = document.createElement("button");
+      btn.textContent = "👁";
+      btn.onclick = async () => {
+        const txt = await decrypt(i.cipher, i.iv, key);
+        btn.textContent = txt;
+        setTimeout(() => btn.textContent = "👁", 3000);
+      };
+      li.textContent = `${i.category} | ${i.title} `;
+      li.appendChild(btn);
       ul.appendChild(li);
-    });
+    }
   };
 }
 
 window.saveItem = async () => {
   const db = await openDB();
-  const data = document.getElementById("secret").value;
-  const { cipher, iv } = await encrypt(data, key);
-
-  db.transaction("items", "readwrite")
+  const { cipher, iv } = await encrypt(secret.value, key);
+  db.transaction("items","readwrite")
     .objectStore("items")
-    .add({
-      category: category.value,
-      title: title.value,
-      cipher,
-      iv
-    });
-
+    .add({ category:category.value, title:title.value, cipher, iv });
   loadItems();
 };
 
-window.lock = () => {
-  sessionStorage.clear();
-  location.href = "index.html";
-};
+window.lock = lockNow;
