@@ -2,7 +2,7 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<title>Vault Login</title>
+<title>Secure Vault</title>
 
 <style>
 *{box-sizing:border-box}
@@ -12,54 +12,50 @@ body{
   display:flex;
   justify-content:center;
   align-items:center;
-  background:
-    radial-gradient(circle at top,#1e3a8a,#020617 60%);
+  background:radial-gradient(circle at top,#0ea5e9,#020617 65%);
   font-family:sans-serif;
   overflow:hidden;
   color:#fff;
 }
 
-/* background motion */
-.bg{
+/* glowing background */
+.bg1,.bg2{
   position:absolute;
-  width:600px;
-  height:600px;
-  background:radial-gradient(circle,#3b82f6,transparent 70%);
-  filter:blur(120px);
-  animation:float 8s infinite alternate;
+  width:520px;
+  height:520px;
+  border-radius:50%;
+  filter:blur(140px);
+  opacity:.6;
+  animation:float 10s infinite alternate;
 }
+.bg1{background:#3b82f6;top:-120px;left:-120px}
+.bg2{background:#22d3ee;bottom:-120px;right:-120px;animation-delay:3s}
+
 @keyframes float{
-  from{transform:translate(-80px,-60px)}
-  to{transform:translate(80px,60px)}
+  from{transform:translateY(-40px)}
+  to{transform:translateY(40px)}
 }
 
 /* card */
 .card{
   position:relative;
+  z-index:10;
   width:320px;
   padding:30px;
   border-radius:20px;
-  background:rgba(2,6,23,.7);
-  backdrop-filter:blur(14px);
-  box-shadow:0 30px 80px rgba(0,0,0,.6);
+  background:rgba(2,6,23,.75);
+  backdrop-filter:blur(18px);
+  box-shadow:0 30px 90px rgba(0,0,0,.8);
   text-align:center;
-  animation:fadeUp .8s ease;
+  animation:fadeIn .8s ease;
 }
 
-@keyframes fadeUp{
+@keyframes fadeIn{
   from{opacity:0;transform:translateY(40px)}
-  to{opacity:1;transform:none}
+  to{opacity:1}
 }
 
-.logo{
-  font-size:32px;
-  margin-bottom:10px;
-}
-
-h2{
-  margin:0 0 20px;
-  font-weight:600;
-}
+h2{margin:0 0 20px}
 
 input{
   width:100%;
@@ -67,8 +63,8 @@ input{
   border-radius:10px;
   border:none;
   outline:none;
-  margin-bottom:14px;
   font-size:15px;
+  margin-bottom:14px;
 }
 
 button{
@@ -76,27 +72,24 @@ button{
   padding:12px;
   border:none;
   border-radius:10px;
-  background:linear-gradient(135deg,#2563eb,#60a5fa);
-  color:white;
+  background:linear-gradient(135deg,#2563eb,#38bdf8);
+  color:#fff;
   font-size:16px;
   cursor:pointer;
   transition:.2s;
 }
 button:hover{
   transform:translateY(-2px);
-  box-shadow:0 10px 25px rgba(59,130,246,.5);
+  box-shadow:0 10px 30px rgba(56,189,248,.6);
 }
 
 .error{
-  margin-top:12px;
   color:#f87171;
   min-height:18px;
 }
 
 /* shake */
-.shake{
-  animation:shake .35s;
-}
+.shake{animation:shake .35s}
 @keyframes shake{
   0%,100%{transform:translateX(0)}
   25%{transform:translateX(-6px)}
@@ -108,22 +101,19 @@ button:hover{
 
 <body>
 
-<div class="bg"></div>
+<div class="bg1"></div>
+<div class="bg2"></div>
 
 <div class="card" id="card">
-  <div class="logo">🔐</div>
-  <h2>Vault ของฉัน</h2>
-
+  <h2>🔐 Vault ของฉัน</h2>
   <input type="password" id="password" placeholder="Master Password">
   <button onclick="login()">เข้าสู่ระบบ</button>
-
   <div class="error" id="error"></div>
 </div>
 
 <script src="js/auth.js"></script>
 
 <script>
-/* เพิ่ม effect เวลาใส่รหัสผิด */
 const oldLogin = login;
 login = function(){
   oldLogin();
