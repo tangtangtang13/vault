@@ -1,0 +1,23 @@
+*{box-sizing:border-box}
+body{
+  margin:0;font-family:system-ui;
+  background:#0f1115;color:#eee
+}
+.center{display:flex;align-items:center;justify-content:center;height:100vh}
+header{
+  display:flex;justify-content:space-between;
+  padding:15px;background:#151821
+}
+main{max-width:900px;margin:auto;padding:15px}
+.card{
+  background:#151821;padding:15px;
+  border-radius:10px;margin-bottom:15px
+}
+.card.small{width:300px}
+input,button{
+  width:100%;padding:10px;margin:5px 0;
+  background:#0f1115;border:1px solid #333;color:#fff
+}
+button{cursor:pointer}
+ul{list-style:none;padding:0}
+li{padding:10px;border-bottom:1px solid #222}

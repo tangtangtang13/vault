@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>Unlock Vault</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="center">
+
+<div class="card small">
+  <h2>🔐 Vault</h2>
+  <input id="master" type="password" placeholder="Master Password">
+  <button onclick="unlock()">Unlock</button>
+</div>
+
+<script type="module">
+import { initSession } from "./js/lock.js";
+window.unlock = () => initSession();
+</script>
+
+</body>
+</html>

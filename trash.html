@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>Trash</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <h1>Trash</h1>
+  <a href="app.html">Back</a>
+</header>
+
+<ul id="trash"></ul>
+
+<script type="module">
+import { loadTrash, restore } from "./js/vault.js";
+loadTrash();
+</script>
+
+</body>
+</html>
