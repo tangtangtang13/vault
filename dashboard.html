@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>Vault ของฉัน</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+/* เผื่อยังไม่ได้สร้าง style.css */
+body{
+  margin:0;
+  font-family:sans-serif;
+  background:linear-gradient(180deg,#020617,#0f172a);
+  color:#fff;
+}
+
+.header{
+  padding:20px;
+  font-size:24px;
+  font-weight:bold;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:24px;
+  padding:20px;
+}
+
+.icon-card{
+  background:#020617;
+  border-radius:20px;
+  padding:24px;
+  text-align:center;
+  cursor:pointer;
+  box-shadow:0 15px 40px rgba(0,0,0,.45);
+  transition:.2s;
+}
+
+.icon-card:hover{
+  transform:translateY(-4px);
+}
+
+.icon-img{
+  width:72px;
+  height:72px;
+  object-fit:contain;
+  margin-bottom:14px;
+}
+
+.icon-card p{
+  margin:0;
+  font-size:20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">📦 Vault ของฉัน</div>
+
+<div class="grid">
+
+  <!-- ROV -->
+  <div class="icon-card" onclick="openVault('rov')">
+    <img src="icons/rov.jpg" class="icon-img" alt="ROV">
+    <p>ROV</p>
+  </div>
+
+  <!-- Facebook -->
+  <div class="icon-card" onclick="openVault('facebook')">
+    <img src="icons/facebook.jpg" class="icon-img" alt="Facebook">
+    <p>Facebook</p>
+  </div>
+
+  <!-- Google (ถ้ามีรูป) -->
+  <div class="icon-card" onclick="openVault('google')">
+    <img src="icons/google.jpg" class="icon-img" alt="Google">
+    <p>Google</p>
+  </div>
+
+</div>
+
+<script>
+/* กันเข้าโดยไม่ login (ถ้าใช้ auth) */
+if(localStorage.getItem("auth") !== "ok"){
+  // ถ้าไม่มีหน้า login ให้คอมเมนต์บรรทัดล่าง
+  // location.href = "index.html";
+}
+
+function openVault(type){
+  localStorage.setItem("vaultType", type);
+  location.href = "vault.html";
+}
+</script>
+
+</body>
+</html>

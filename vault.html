@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>Vault</title>
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+body{
+  margin:0;
+  font-family:sans-serif;
+  background:linear-gradient(180deg,#020617,#0f172a);
+  color:#fff;
+}
+
+.header{
+  padding:20px;
+  font-size:22px;
+  font-weight:bold;
+}
+
+.list{
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+.item{
+  background:#020617;
+  border-radius:16px;
+  padding:16px;
+  box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+
+.item-title{
+  font-size:18px;
+  margin-bottom:8px;
+}
+
+.row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-top:6px;
+}
+
+button{
+  background:#2563eb;
+  border:none;
+  color:#fff;
+  padding:6px 10px;
+  border-radius:8px;
+  cursor:pointer;
+  margin-left:6px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header" id="title">Vault</div>
+
+<div class="list" id="list"></div>
+
+<script src="js/vault.js"></script>
+</body>
+</html>
