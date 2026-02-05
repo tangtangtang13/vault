@@ -1,12 +1,15 @@
-const MASTER_PASSWORD = "030646";
+import { deriveKey } from "./crypto.js";
 
-function login(){
-  const pass = document.getElementById("password").value;
-  if(pass === MASTER_PASSWORD){
-    sessionStorage.setItem("auth","ok");
-    sessionStorage.setItem("key", pass);
-    location.replace("app.html");
-  }else{
-    document.getElementById("error").innerText = "รหัสไม่ถูกต้อง";
-  }
-}
+window.unlock = async () => {
+  const pw = document.getElementById("master").value;
+  if (!pw) return alert("030646");
+
+  const salt = crypto.getRandomValues(new Uint8Array(16));
+  const key = await deriveKey(pw, salt);
+
+  sessionStorage.setItem("vault_key", JSON.stringify({
+    salt: Array.from(salt)
+  }));
+
+  window.location = "app.html";
+};
