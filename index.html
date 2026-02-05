@@ -2,7 +2,13 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Secure Vault</title>
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#020617">
 
 <style>
 *{box-sizing:border-box}
@@ -18,7 +24,7 @@ body{
   color:#fff;
 }
 
-/* glowing background */
+/* animated glow background */
 .bg1,.bg2{
   position:absolute;
   width:520px;
@@ -36,7 +42,7 @@ body{
   to{transform:translateY(40px)}
 }
 
-/* card */
+/* login card */
 .card{
   position:relative;
   z-index:10;
@@ -55,7 +61,10 @@ body{
   to{opacity:1}
 }
 
-h2{margin:0 0 20px}
+h2{
+  margin:0 0 20px;
+  font-weight:600;
+}
 
 input{
   width:100%;
@@ -88,7 +97,7 @@ button:hover{
   min-height:18px;
 }
 
-/* shake */
+/* shake when error */
 .shake{animation:shake .35s}
 @keyframes shake{
   0%,100%{transform:translateX(0)}
@@ -101,9 +110,11 @@ button:hover{
 
 <body>
 
+<!-- glow background -->
 <div class="bg1"></div>
 <div class="bg2"></div>
 
+<!-- login card -->
 <div class="card" id="card">
   <h2>🔐 Vault ของฉัน</h2>
   <input type="password" id="password" placeholder="Master Password">
@@ -111,12 +122,14 @@ button:hover{
   <div class="error" id="error"></div>
 </div>
 
+<!-- auth logic -->
 <script src="js/auth.js"></script>
 
+<!-- animation when wrong password -->
 <script>
-const oldLogin = login;
+const _login = login;
 login = function(){
-  oldLogin();
+  _login();
   setTimeout(()=>{
     if(document.getElementById("error").innerText){
       const card=document.getElementById("card");
@@ -124,6 +137,13 @@ login = function(){
       setTimeout(()=>card.classList.remove("shake"),400);
     }
   },50);
+}
+</script>
+
+<!-- register service worker -->
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("js/sw.js");
 }
 </script>
 
