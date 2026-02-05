@@ -4,37 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Vault Login</title>
-
-<style>
-body{
-  margin:0;height:100vh;display:flex;align-items:center;justify-content:center;
-  background:radial-gradient(circle,#0ea5e9,#020617 65%);
-  font-family:sans-serif;color:#fff;
-}
-.card{
-  width:320px;padding:28px;border-radius:22px;
-  background:rgba(2,6,23,.75);backdrop-filter:blur(18px);
-  box-shadow:0 30px 80px rgba(0,0,0,.8);text-align:center;
-}
-button,input{
-  width:100%;padding:12px;border-radius:10px;border:none;margin-top:12px;
-}
-button{
-  background:linear-gradient(135deg,#2563eb,#38bdf8);
-  color:#fff;font-size:15px;cursor:pointer;
-}
-.face{background:#22c55e}
-.error{color:#f87171;height:18px}
-</style>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
+<body class="center">
+
 <div class="card">
   <h2>🔐 Vault</h2>
   <input id="password" type="password" placeholder="Master Password">
   <button onclick="login()">เข้าสู่ระบบ</button>
-  <button class="face" onclick="loginWithBiometric()">👆 Face ID</button>
-  <div class="error" id="error"></div>
+  <button class="alt" onclick="loginWithBiometric()">👆 Face ID</button>
+  <p id="error"></p>
 </div>
 
 <script src="js/auth.js"></script>
