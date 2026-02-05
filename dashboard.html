@@ -2,37 +2,88 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dashboard</title>
+
 <style>
-body{margin:0;font-family:sans-serif;background:#020617;color:#fff}
+body{
+  margin:0;
+  font-family:sans-serif;
+  background:#020617;
+  color:#fff;
+}
+
+.container{
+  max-width:420px;
+  margin:60px auto;
+  padding:20px;
+}
+
 .card{
-  margin:40px;padding:30px;border-radius:20px;
-  background:#020617;box-shadow:0 20px 50px rgba(0,0,0,.6);
-  text-align:center;cursor:pointer;
+  background:rgba(2,6,23,.8);
+  border-radius:18px;
+  padding:22px;
+  margin-bottom:20px;
+  text-align:center;
+  font-size:20px;
+  cursor:pointer;
+  box-shadow:0 20px 50px rgba(0,0,0,.6);
+  transition:.2s;
+}
+
+.card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 30px 70px rgba(0,0,0,.8);
+}
+
+.logout{
+  background:#ef4444;
 }
 </style>
 </head>
 
 <body>
+
+<!-- 🔒 กันเข้าโดยไม่ Login + กันกดย้อนกลับ -->
 <script>
-if(sessionStorage.getItem("auth")!=="ok"){
-  location.replace("index.html");
-}
+(function secure(){
+  if(sessionStorage.getItem("auth") !== "ok"){
+    location.replace("index.html");
+  }
+
+  history.pushState(null,"",location.href);
+  window.onpopstate = function(){
+    history.pushState(null,"",location.href);
+    location.replace("index.html");
+  };
+})();
 </script>
 
-<div class="card" onclick="location.href='notes.html'">
-  📝 โน้ต / รหัสผ่าน
-</div>
+<div class="container">
 
-<div class="card" onclick="logout()">
-  🚪 ออกจากระบบ
+  <!-- ไปหน้าโน้ต -->
+  <div class="card" onclick="goVault()">
+    📝 โน้ต / รหัสผ่าน
+  </div>
+
+  <!-- ออกจากระบบ -->
+  <div class="card logout" onclick="logout()">
+    🚪 ออกจากระบบ
+  </div>
+
 </div>
 
 <script>
+function goVault(){
+  location.replace("vault.html");
+}
+
 function logout(){
   sessionStorage.clear();
+  history.replaceState(null,"","index.html");
   location.replace("index.html");
 }
 </script>
+
 </body>
 </html>
