@@ -1,4 +1,4 @@
-const MASTER_PASSWORD = "1234"; // 🔴 เปลี่ยนเป็นรหัสของสตางค์
+const MASTER_PASSWORD = "030646"; // 🔴 เปลี่ยนเป็นรหัสของสตางค์
 
 function login(){
   const pass = document.getElementById("password").value;
