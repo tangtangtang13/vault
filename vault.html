@@ -1,3 +1,54 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vault</title>
+
+<style>
+body{
+  margin:0;
+  font-family:sans-serif;
+  background:#020617;
+  color:#fff;
+  padding:20px;
+}
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+button{
+  background:#2563eb;
+  border:none;
+  color:#fff;
+  padding:8px 14px;
+  border-radius:8px;
+  cursor:pointer;
+}
+textarea{
+  width:100%;
+  height:220px;
+  border-radius:12px;
+  border:none;
+  padding:12px;
+  font-size:15px;
+}
+.note{
+  margin-top:20px;
+  padding:14px;
+  background:#020617;
+  border-radius:12px;
+  box-shadow:0 10px 30px rgba(0,0,0,.5);
+  white-space:pre-wrap;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🔒 กันเข้าโดยไม่ Login + กัน Back -->
 <script>
 (function secure(){
   if(sessionStorage.getItem("auth")!=="ok"){
@@ -10,3 +61,38 @@
   }
 })();
 </script>
+
+<div class="header">
+  <h2>🔐 Vault</h2>
+  <button onclick="back()">← กลับ</button>
+</div>
+
+<textarea id="text" placeholder="พิมพ์รหัส / โน้ตของคุณที่นี่"></textarea>
+<button onclick="save()">💾 บันทึก</button>
+
+<div class="note" id="view"></div>
+
+<script>
+const KEY="vault_note";
+
+function save(){
+  const t=document.getElementById("text").value;
+  localStorage.setItem(KEY,t);
+  load();
+}
+
+function load(){
+  const t=localStorage.getItem(KEY)||"";
+  document.getElementById("text").value=t;
+  document.getElementById("view").innerText=t;
+}
+
+function back(){
+  location.replace("dashboard.html");
+}
+
+load();
+</script>
+
+</body>
+</html>
