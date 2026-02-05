@@ -1,34 +1,21 @@
-<!DOCTYPE html>
-<html lang="th">
-<head>
-<meta charset="UTF-8">
-<title>Vault</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-
-<header>
-  <h1>My Vault</h1>
-  <button onclick="lock()">Lock</button>
-</header>
-
 <main>
+
+  <!-- ADD -->
   <section class="card">
-    <h3>Add Item</h3>
-    <input id="title" placeholder="Title">
-    <input id="secret" placeholder="Password / Note">
-    <input id="tags" placeholder="tags (comma)">
-    <button onclick="add()">Save</button>
-    <div id="strength"></div>
+    <h3>➕ เพิ่มรหัสใหม่</h3>
+    <div class="add-grid">
+      <input id="title" placeholder="ชื่อบัญชี / เว็บไซต์">
+      <input id="secret" placeholder="รหัสผ่าน / โน้ต">
+      <input id="tags" placeholder="แท็ก (เช่น gmail, game)">
+      <button onclick="add()">บันทึก</button>
+      <div id="strength"></div>
+    </div>
   </section>
 
+  <!-- LIST -->
   <section class="card">
-    <input id="search" placeholder="Search">
-    <ul id="list"></ul>
+    <h3>🗂 รายการที่เก็บไว้</h3>
+    <div id="list" class="list"></div>
   </section>
+
 </main>
-
-<script type="module" src="js/vault.js"></script>
-</body>
-</html>
